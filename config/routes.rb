@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   resources :lists
 
-  get 'home/index'
+  resources :tasks
 
-  root to: 'lists#index'
+  get 'home/index'
+  get 'home/dashboard'
+
+  root to: 'home#dashboard'
 end

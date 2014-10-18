@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ToDoList</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "ToDoList" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+  </head>
 
-<%= yield %>
+  <body>
 
-</body>
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-brand">ToDoList</div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Nova lista", new_list_path %></li>
+            <li><%= link_to "Minhas listas", lists_path %></li>
+            <li><%= link_to "Explorar", home_dashboard_path %></li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
 </html>

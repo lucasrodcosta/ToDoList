@@ -9,6 +9,15 @@ require "action_view/railtie"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
+# Moped’s BSON implementation has been removed in favor of the MongoDB bson gem 2.0 and higher.
+# All Moped::BSON references must change to BSON.
+#  - http://artsy.github.io/blog/2013/11/07/upgrading-to-mongoid4/
+#  - https://github.com/mongoid/mongoid/issues/3455
+require "moped"
+require "bson"
+
+Moped::BSON = BSON
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

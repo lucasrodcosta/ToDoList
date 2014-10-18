@@ -1,0 +1,27 @@
+<h3>Minhas listas</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Visibilidade</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td><%= list.name %></td>
+        <td><%= format_description(list.description) %></td>
+        <td><%= list.visibility %></td>
+        <td><%= link_to 'Editar', edit_list_path(list) %></td>
+        <td><%= link_to 'Deletar', list, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta lista?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
