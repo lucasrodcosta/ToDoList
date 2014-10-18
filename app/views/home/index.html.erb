@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "ToDoList" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+  </head>
+
+  <body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-brand">ToDoList</div>
+        <ul class="nav navbar-nav pull-right">
+          <li><%= link_to "Login", new_user_session_path %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container text-center home-content">
+      <div class="row col-lg-12">
+        <%= image_tag("home_index.jpg", :class => "home_image") %>
+      </div>
+
+      <div class="row col-lg-12">
+        <h3>A maneira mais fácil de organizar suas listas de tarefas!</h3>
+      </div>
+
+      <div class="row col-lg-12">
+        <h4>Crie sua conta agora mesmo e começe a usar!</h4>
+      </div>
+
+      <div class="row col-lg-12">
+        <%= link_to "Criar conta", new_user_registration_path, :class => "btn btn-primary" %>
+      </div>
+    </div>
+</body>
