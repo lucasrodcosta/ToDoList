@@ -3,9 +3,9 @@ class Task
 
   belongs_to :list
 
-  field :name,        type: String
   field :description, type: String
-  field :done,        type: Boolean
+  field :date,        type: DateTime
+  field :done,        type: Boolean, default: false
 
-  validates_presence_of :name
+  validates_presence_of :description
 end

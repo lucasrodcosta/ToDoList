@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  before_filter :authenticate_user!
+
+  respond_to :html, :js
+
   def index
-    @tasks = Task.all
+    @list = List.find(params[:list])
+    @tasks = @list.tasks.all
     respond_with(@tasks)
   end
 
@@ -12,16 +17,19 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @list = List.find(params[:list])
     respond_with(@task)
   end
 
   def edit
+    @task = Task.find(params[:id])
+    @list = @task.list
+    respond_with(@task)
   end
 
   def create
     @task = Task.new(task_params)
-    @task.save
-    respond_with(@task)
+    respond_with(@task, location: -> { tasks_path(list: @task.list) })
   end
 
   def update
@@ -40,6 +48,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params[:task]
+      params[:task].permit!
     end
 end

@@ -1,6 +1,10 @@
 class ListsController < ApplicationController
-  before_filter :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
+
+  before_filter :authenticate_user!
+
+  responders :location, :flash
+  respond_to :html
 
   def index
     @lists = List.all
@@ -22,12 +26,12 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.save
-    respond_with(@list)
+    respond_with(@list, location: -> { tasks_path(list: @list) })
   end
 
   def update
     @list.update(list_params)
-    respond_with(@list)
+    respond_with(@list, location: -> { tasks_path(list: @list) })
   end
 
   def destroy

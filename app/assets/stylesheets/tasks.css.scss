@@ -1,3 +1,17 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.add-task-content > a.add-task:hover {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
+
+div.add-task-content > img.add-task {
+  height: 25px;
+}
+
+.modal-open .datepicker {
+  z-index: 1200 !important;
+}
