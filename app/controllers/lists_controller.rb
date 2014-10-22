@@ -1,10 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
-  before_filter :authenticate_user!
-
-  responders :location, :flash
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @lists = List.all
@@ -21,17 +18,18 @@ class ListsController < ApplicationController
   end
 
   def edit
+    respond_with(@list)
   end
 
   def create
     @list = List.new(list_params)
     @list.save
-    respond_with(@list, location: -> { tasks_path(list: @list) })
+    render js: "window.location = '/tasks?list=#{@list.id}'"
   end
 
   def update
     @list.update(list_params)
-    respond_with(@list, location: -> { tasks_path(list: @list) })
+    render js: "window.location = '/tasks?list=#{@list.id}'"
   end
 
   def destroy

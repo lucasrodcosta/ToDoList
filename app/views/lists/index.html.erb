@@ -5,7 +5,8 @@
     <tr>
       <th>Nome</th>
       <th>Descrição</th>
-      <th>Visibilidade</th>
+      <th class="list-visibility">Visibilidade</th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -16,8 +17,15 @@
       <tr>
         <td><%= list.name %></td>
         <td><%= format_description(list.description) %></td>
-        <td><%= list.visibility %></td>
-        <td><%= link_to 'Editar', edit_list_path(list) %></td>
+        <td class="list-visibility">
+          <% if list.private? %>
+            <%= image_tag 'lock_icon.png', :class => 'list-visibility', :title => 'Privada' %>
+          <% elsif list.public? %>
+            <%= image_tag 'world_icon.png', :class => 'list-visibility', :title => 'Pública' %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Ir para as tarefas', tasks_path(list: list) %></td>
+        <td><%= link_to 'Editar', edit_list_path(list), :class => 'edit-list', :"data-toggle" => 'modal', :"data-target" => '#list-modal', :remote => true %></td>
         <td><%= link_to 'Deletar', list, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta lista?' } %></td>
       </tr>
     <% end %>
@@ -25,3 +33,10 @@
 </table>
 
 <br>
+
+<div class="add-list-content">
+  <%= image_tag 'add_icon.png', :class => 'add-list' %>
+  <%= link_to "Criar nova lista", new_list_path, :class => 'add-list', :"data-toggle" => 'modal', :"data-target" => '#list-modal', :remote => true %>
+</div>
+
+<div class="bootstrap-modal modal fade in" id="list-modal" aria-hidden="false"></div>

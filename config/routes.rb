@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/dashboard'
 
-  root to: 'home#dashboard'
+  authenticated do
+    root to: 'lists#index', as: :authenticated
+  end
+
+  root to: 'home#index'
 end

@@ -1,13 +1,11 @@
-<h3 class="page-title">
-  Fique à vontade para criar ou editar suas tarefas =)
-</h3>
-
+<h5 class="breadcrumb"><%= link_to "Minhas listas", lists_path %> > <%= @list.name %></h5>
+<h3 class="page-title">Crie/edite suas tarefas</h3>
 
 <table class="table">
   <thead>
     <tr>
       <th>Descrição</th>
-      <th>Data</th>
+      <th>Data limite</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -18,8 +16,7 @@
         <td><%= format_description(task.description) %></td>
         <td><%= task.date %></td>
         <td><%= task.done %></td>
-        <td><%= link_to 'Editar', edit_task_path(task) %></td>
-        <td><%= link_to 'Editar', edit_task_path(task), :class => 'edit-task', :"data-toggle" => 'modal', :"data-target" => '#add-task-modal', :remote => true %></td>
+        <td><%= link_to 'Editar', edit_task_path(task), :class => 'edit-task', :"data-toggle" => 'modal', :"data-target" => '#task-modal', :remote => true %></td>
         <td><%= link_to 'Deletar', task, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' } %></td>
       </tr>
     <% end %>
@@ -29,8 +26,8 @@
 <br>
 
 <div class="add-task-content">
-  <%= image_tag('add_task.png', :class => 'add-task') %>
-  <%= link_to "Adicionar tarefa", new_task_path(list: @list), :class => 'add-task', :"data-toggle" => 'modal', :"data-target" => '#add-task-modal', :remote => true %>
+  <%= image_tag('add_icon.png', :class => 'add-task') %>
+  <%= link_to "Adicionar tarefa", new_task_path(list: @list), :class => 'add-task', :"data-toggle" => 'modal', :"data-target" => '#task-modal', :remote => true %>
 </div>
 
-<div class="bootstrap-modal modal fade in" id="add-task-modal" aria-hidden="false"></div>
+<div class="bootstrap-modal modal fade in" id="task-modal" aria-hidden="false"></div>

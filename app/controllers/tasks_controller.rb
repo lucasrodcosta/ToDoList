@@ -1,8 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  before_filter :authenticate_user!
-
   respond_to :html, :js
 
   def index
@@ -22,19 +20,20 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
     @list = @task.list
     respond_with(@task)
   end
 
   def create
     @task = Task.new(task_params)
-    respond_with(@task, location: -> { tasks_path(list: @task.list) })
+    @task.save
+    @list = @task.list
+    render js: "window.location = '/tasks?list=#{@list.id}'"
   end
 
   def update
     @task.update(task_params)
-    respond_with(@task)
+    render js: "window.location = '/tasks?list=#{@list.id}'"
   end
 
   def destroy
