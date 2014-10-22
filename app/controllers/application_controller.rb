@@ -9,4 +9,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :authenticate_user!
+
+  layout :layout_by_resource
+
+  private
+
+  # Using a custom layout for Devise resources
+  def layout_by_resource
+    devise_controller? ? "devise_custom" : "application"
+  end
+
 end
