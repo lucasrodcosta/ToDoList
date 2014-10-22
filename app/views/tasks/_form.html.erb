@@ -12,7 +12,8 @@
           <div class="form-inputs">
             <%= f.input :list, as: :hidden, input_html: { value: @list.id } %>
             <%= f.input :description, label: "Descrição da tarefa", input_html: {size: 75} %>
-            <%= f.input :date, as: :string, label: "Data", input_html: {:"data-provide" => "datepicker"} %>
+            <%= f.input :date, label: "Data", input_html: {:"data-provide" => "datepicker", :id => "datapicker"} %>
+            <%= f.input :status, label: "Andamento da atividade", as: :select, collection: status_enum, include_blank: false, input_html: {value: status_enum.first} %>
           </div>
         </div>
 
@@ -26,3 +27,7 @@
       </div>
     </div>
 <% end %>
+
+<script>
+  $('#datepicker').datepicker({format: 'dd-mm-yyyy'});
+</script>

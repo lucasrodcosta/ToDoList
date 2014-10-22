@@ -1,12 +1,11 @@
 <h5 class="breadcrumb"><%= link_to "Minhas listas", lists_path %> > <%= @list.name %></h5>
-<h3 class="page-title">Crie/edite suas tarefas</h3>
 
 <table class="table">
   <thead>
     <tr>
       <th>Descrição</th>
       <th>Data limite</th>
-      <th>Status</th>
+      <th class="task-status">Status</th>
     </tr>
   </thead>
 
@@ -15,7 +14,15 @@
       <tr>
         <td><%= format_description(task.description) %></td>
         <td><%= task.date %></td>
-        <td><%= task.done %></td>
+        <td class="task-status">
+          <% if task.undone? %>
+            <%= image_tag 'undone_icon.png', :class => 'task-status', :title => 'Não iniciada' %>
+          <% elsif task.in_progress? %>
+            <%= image_tag 'in_progress_icon.png', :class => 'task-status', :title => 'Em andamento' %>
+          <% elsif task.done? %>
+            <%= image_tag 'done_icon.png', :class => 'task-status', :title => 'Concluída' %>
+          <% end %>
+        </td>
         <td><%= link_to 'Editar', edit_task_path(task), :class => 'edit-task', :"data-toggle" => 'modal', :"data-target" => '#task-modal', :remote => true %></td>
         <td><%= link_to 'Deletar', task, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' } %></td>
       </tr>

@@ -15,3 +15,11 @@ div.add-task-content > img.add-task {
 .modal-open .datepicker {
   z-index: 1200 !important;
 }
+
+th.task-status, td.task-status {
+  text-align: center;
+}
+
+img.task-status {
+  height: 25px;
+}

@@ -15,6 +15,12 @@
  *= require_self
  */
 
-h3.page-title {
-  margin-bottom: 30px;
+a:hover {
+  background-color: white;
+  color: black;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: black;
 }

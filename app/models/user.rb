@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
 
-  has_many :lists
+  has_many :lists, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

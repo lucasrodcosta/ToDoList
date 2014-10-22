@@ -3,7 +3,7 @@ class List
   include Mongoid::Enum
 
   belongs_to :user
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   field :name,        type: String
   field :description, type: String
@@ -18,6 +18,14 @@ class List
 
   def self.visibility_enum
     [["Privada", :private], ["Pública", :public]]
+  end
+
+  def progress
+    total = self.tasks.count
+    return 0 if total == 0
+
+    done = self.tasks.select{ |t| t.done? }.count
+    100*(done/total).round(0)
   end
 
 end

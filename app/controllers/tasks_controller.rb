@@ -33,6 +33,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update(task_params)
+    @list = @task.list
     render js: "window.location = '/tasks?list=#{@list.id}'"
   end
 
