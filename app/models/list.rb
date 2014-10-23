@@ -22,7 +22,7 @@ class List
 
   def progress
     total = self.tasks.count
-    return 0 if total == 0
+    return nil if total == 0
 
     done = self.tasks.select{ |t| t.done? }.count
     100*(done/total).round(0)

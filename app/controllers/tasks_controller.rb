@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :mark_as_done, :mark_as_undone]
 
   respond_to :html, :js
 
@@ -39,6 +39,18 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
+    respond_with(@task)
+  end
+
+  def mark_as_done
+    @task.done = true
+    @task.save
+    respond_with(@task)
+  end
+
+  def mark_as_undone
+    @task.done = false
+    @task.save
     respond_with(@task)
   end
 

@@ -1,0 +1,6 @@
+var elem_id = '<%= @task.id %>'
+var new_url = '<%= mark_as_done_task_path %>';
+var new_image_path = '<%= asset_path "unchecked_icon.png" %>';
+
+$('a.task-status#' + elem_id).attr('href', new_url);
+$('a.task-status#' + elem_id + ' > img').attr('src', new_image_path);

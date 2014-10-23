@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @lists = List.all
+    @lists = List.where(user: current_user).all
     respond_with(@lists)
   end
 
@@ -23,6 +23,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    @list.user = current_user
     @list.save
     render js: "window.location = '/tasks?list=#{@list.id}'"
   end

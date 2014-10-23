@@ -1,9 +1,5 @@
 module TasksHelper
-  DESCRIPTION_CHARS_LIMIT = 100
-
-  def status_enum
-    Task.status_enum
-  end
+  DESCRIPTION_CHARS_LIMIT = 200
 
   def format_description(description = "")
     return description if description.size <= DESCRIPTION_CHARS_LIMIT

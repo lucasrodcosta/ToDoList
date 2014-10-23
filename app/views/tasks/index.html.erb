@@ -3,9 +3,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Descrição</th>
-      <th>Data limite</th>
-      <th class="task-status">Status</th>
+      <th class="col-sm-4">Descrição</th>
+      <th class="col-sm-4 task-status">Status</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -13,17 +14,14 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= format_description(task.description) %></td>
-        <td><%= task.date %></td>
         <td class="task-status">
-          <% if task.undone? %>
-            <%= image_tag 'undone_icon.png', :class => 'task-status', :title => 'Não iniciada' %>
-          <% elsif task.in_progress? %>
-            <%= image_tag 'in_progress_icon.png', :class => 'task-status', :title => 'Em andamento' %>
-          <% elsif task.done? %>
-            <%= image_tag 'done_icon.png', :class => 'task-status', :title => 'Concluída' %>
+          <% if task.done %>
+            <%= link_to image_tag('checked_icon.png'), mark_as_undone_task_path(task), :class => 'task-status', :id => task.id, :remote => true, :method => :post %>
+          <% else %>
+            <%= link_to image_tag('unchecked_icon.png'), mark_as_done_task_path(task), :class => 'task-status', :id => task.id, :remote => true, :method => :post %>
           <% end %>
         </td>
-        <td><%= link_to 'Editar', edit_task_path(task), :class => 'edit-task', :"data-toggle" => 'modal', :"data-target" => '#task-modal', :remote => true %></td>
+        <td><%= link_to 'Editar descrição', edit_task_path(task), :class => 'edit-task', :"data-toggle" => 'modal', :"data-target" => '#task-modal', :remote => true %></td>
         <td><%= link_to 'Deletar', task, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta tarefa?' } %></td>
       </tr>
     <% end %>

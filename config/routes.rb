@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   resources :lists
 
-  resources :tasks
+  resources :tasks do
+    post :mark_as_done, on: :member
+    post :mark_as_undone, on: :member
+  end
 
   get 'home/index'
   get 'home/dashboard'
