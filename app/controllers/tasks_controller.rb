@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :mark_as_done, :mark_as_undone]
+  before_action :set_task, only: [:edit, :update, :destroy, :mark_as_done, :mark_as_undone]
 
   respond_to :html, :js
 
@@ -7,10 +7,6 @@ class TasksController < ApplicationController
     @list = List.find(params[:list])
     @tasks = @list.tasks.all
     respond_with(@tasks)
-  end
-
-  def show
-    respond_with(@task)
   end
 
   def new

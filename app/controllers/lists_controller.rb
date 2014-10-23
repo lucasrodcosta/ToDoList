@@ -1,15 +1,11 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:edit, :update, :destroy]
 
   respond_to :html, :js
 
   def index
     @lists = List.where(user: current_user).all
     respond_with(@lists)
-  end
-
-  def show
-    respond_with(@list)
   end
 
   def new

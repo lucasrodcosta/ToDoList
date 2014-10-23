@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :lists
+  resources :lists, except: :show
 
-  resources :tasks do
+  resources :tasks, except: :show do
     post :mark_as_done, on: :member
     post :mark_as_undone, on: :member
   end
