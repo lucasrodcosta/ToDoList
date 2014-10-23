@@ -1,10 +1,10 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :update, :destroy]
+  before_action :set_list, only: [:edit, :update, :destroy, :mark_as_favorite, :unmark_as_favorite]
 
   respond_to :html, :js
 
   def index
-    @lists = List.where(user: current_user).all
+    @lists = current_user.lists.all
     respond_with(@lists)
   end
 
@@ -32,6 +32,25 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
     respond_with(@list)
+  end
+
+  def explore
+    @lists = List.get_public_lists
+    respond_with(@lists)
+  end
+
+  def mark_as_favorite
+    @favorite = FavoriteList.new
+    @favorite.list = @list
+    @favorite.user = current_user
+    @favorite.save
+    respond_with(@favorite)
+  end
+
+  def unmark_as_favorite
+    @favorite = FavoriteList.where(list: @list, user: current_user).first
+    @favorite.destroy if @favorite
+    respond_with(@favorite)
   end
 
   private

@@ -1,0 +1,6 @@
+var elem_id = '<%= @list.id %>'
+var new_url = '<%= unmark_as_favorite_list_path %>';
+var new_image_path = '<%= asset_path "yellow_star_icon.png" %>';
+
+$('a.favorite-list-status#' + elem_id).attr('href', new_url);
+$('a.favorite-list-status#' + elem_id + ' > img').attr('src', new_image_path);

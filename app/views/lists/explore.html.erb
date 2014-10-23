@@ -1,0 +1,31 @@
+<h5 class="breadcrumb">Explorar</h5>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Usuário</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td>
+          <% if current_user.has_this_list_as_favorite?(list) %>
+            <%= link_to image_tag('yellow_star_icon.png'), unmark_as_favorite_list_path(list), :class => 'favorite-list-status', :id => list.id, :remote => true, :method => :post %>
+          <% else %>
+            <%= link_to image_tag('gray_star_icon.png'), mark_as_favorite_list_path(list), :class => 'favorite-list-status', :id => list.id, :remote => true, :method => :post %>
+          <% end %>
+        </td>
+        <td><%= list.name %></td>
+        <td><%= format_description(list.description) %></td>
+        <td><%= list.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,7 +1,8 @@
 class User
   include Mongoid::Document
 
-  has_many :lists, dependent: :destroy
+  has_many :lists,          dependent: :destroy
+  has_many :favorite_lists, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -39,5 +40,9 @@ class User
   def self.serialize_from_session(key, salt)
     record = to_adapter.get(key[0]["$oid"])
     record if record && record.authenticatable_salt == salt
+  end
+
+  def has_this_list_as_favorite?(list)
+    (self.favorite_lists.where(list: list).count > 0) ? true : false
   end
 end

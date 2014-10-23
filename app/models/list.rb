@@ -3,7 +3,8 @@ class List
   include Mongoid::Enum
 
   belongs_to :user
-  has_many :tasks, dependent: :destroy
+  has_many :tasks,          dependent: :destroy
+  has_many :favorite_lists, dependent: :destroy
 
   field :name,        type: String
   field :description, type: String
@@ -15,6 +16,10 @@ class List
   validates_uniqueness_of :name, scope: :user_id
   validates_presence_of :name
 
+
+  def self.get_public_lists
+    List.where(visibility: :public).all
+  end
 
   def self.visibility_enum
     [["Privada", :private], ["Pública", :public]]
