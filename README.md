@@ -1,7 +1,6 @@
 ToDoList
 ========
 
----
 #### O que é:
 Organizador simples de To-Do Lists.
 
