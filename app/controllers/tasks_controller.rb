@@ -34,8 +34,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    list = @task.list
     @task.destroy
-    respond_with(@task)
+    redirect_to(tasks_path(list: list))
   end
 
   def mark_as_done

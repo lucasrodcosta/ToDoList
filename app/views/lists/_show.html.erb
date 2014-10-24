@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+    </div>
+
+    <div class="modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-sm-4">Descrição</th>
+            <th class="col-sm-4 task-status">Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= format_description(task.description) %></td>
+              <td class="task-status">
+                <% if task.done %>
+                  <%= image_tag 'checked_icon.png', :class => 'task-status' %>
+                <% else %>
+                  <%= image_tag 'unchecked_icon.png', :class => 'task-status' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal-footer">
+      <%= link_to "Fechar", nil, :class => "btn btn-default", :id => "cancel-task" , :"data-dismiss" => "modal", :"data-target" => '#cancel-task' %>
+    </div>
+
+  </div>
+</div>

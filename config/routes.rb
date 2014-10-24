@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :lists, except: :show do
+  resources :lists do
     get  :explore,            on: :collection
     post :mark_as_favorite,   on: :member
     post :unmark_as_favorite, on: :member

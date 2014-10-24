@@ -14,8 +14,8 @@
         <%= link_to "ToDoList", root_path, :class => "navbar-brand" %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Minhas listas", lists_path %></li>
-            <li><%= link_to "Explorar", explore_lists_path %></li>
+            <li class="menu <%= (request.path == lists_path || request.path == root_path) ? 'selected' : '' %>"><%= link_to "Minhas listas", lists_path %></li>
+            <li class="menu <%= (request.path == explore_lists_path) ? 'selected' : '' %>"><%= link_to "Explorar", explore_lists_path %></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>

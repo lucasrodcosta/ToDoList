@@ -23,3 +23,7 @@ a:hover {
 a:visited {
   color: black;
 }
+
+li.menu.selected {
+  background-color: #e3e3e3;
+}

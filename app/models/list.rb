@@ -30,7 +30,7 @@ class List
     return nil if total == 0
 
     done = self.tasks.select{ |t| t.done? }.count
-    100*(done/total).round(0)
+    (100*done/total.to_f).round(0)
   end
 
 end

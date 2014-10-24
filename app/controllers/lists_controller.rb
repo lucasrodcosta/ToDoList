@@ -1,11 +1,16 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :update, :destroy, :mark_as_favorite, :unmark_as_favorite]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :mark_as_favorite, :unmark_as_favorite]
 
   respond_to :html, :js
 
   def index
     @lists = current_user.lists.all
     respond_with(@lists)
+  end
+
+  def show
+    @tasks = @list.tasks
+    respond_with(@list)
   end
 
   def new

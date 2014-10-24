@@ -27,13 +27,8 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
-  field :name, type: String
-
   # user email must be unique
   validates_uniqueness_of :email
-
-  # user must have a name
-  validates_presence_of :name
 
   # Workaround to solve the issue with Devise and Mongoid 4
   # https://github.com/plataformatec/devise/issues/2949
