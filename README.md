@@ -17,10 +17,10 @@ Organizador simples de To-Do Lists.
 - [x] Tela de criação de tarefas via ajax
 - [x] Tela de "Explorar", com as listas públicas de todos os usuários
 - [x] Opção de marcar lista como favorita na tela de "Explorar" através do ícone de estrela
-- [-] Testes com Rspec e Capybara: testes não estão com a cobertura ideal ainda e falham ao serem executados em lote (vide a nota na seção sobre os testes)
-- [] Estilos das páginas do Devise
-- [] Segurança: impedir que um usuário veja listas privadas de outros usuários através de manipulação direta de URL
-- [] Flash messages em caso de operações mal-sucedidas
+- [x] *** Testes com Rspec e Capybara: testes não estão com a cobertura ideal ainda e falham ao serem executados em lote (vide a nota na seção sobre os testes)
+- [ ] Estilos das páginas do Devise
+- [ ] Segurança: impedir que um usuário veja listas privadas de outros usuários através de manipulação direta de URL
+- [ ] Flash messages em caso de operações mal-sucedidas
 
 ---
 #### Execução dos testes automatizados
