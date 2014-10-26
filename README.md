@@ -11,15 +11,26 @@ Organizador simples de To-Do Lists.
 
 ---
 #### Status
+Entrega 1
+
 - [x] Sign in/Sign up com Devise
 - [x] Tela de criação de listas
 - [x] Tela de criação de tarefas via ajax
 - [x] Tela de "Explorar", com as listas públicas de todos os usuários
 - [x] Opção de marcar lista como favorita na tela de "Explorar" através do ícone de estrela
-- [x] *** Testes com Rspec e Capybara: testes não estão com a cobertura ideal ainda e falham ao serem executados em lote (vide a nota na seção sobre os testes)
+- [x] \*\*\* Testes com Rspec e Capybara: testes não estão com a cobertura ideal ainda e falham ao serem executados em lote (vide a nota na seção sobre os testes)
+
+Entrega 2
+
+- [x] Segurança: impedir que um usuário veja listas privadas de outros usuários através de manipulação direta de URL
+- [x] Flash messages em caso de operações mal-sucedidas
+- [x] Exibição de listas favoritas na página inicial
+- [x] Feature de "desativar" listas favoritas: se um usuário A possui uma lista favorita X, e o usuário B dono de X torna essa lista privada, então X deixa de ser visível para A. Se B tornar X pública novamente, X volta a ser visível para A.
+
+Próximas entregas
+
 - [ ] Estilos das páginas do Devise
-- [ ] Segurança: impedir que um usuário veja listas privadas de outros usuários através de manipulação direta de URL
-- [ ] Flash messages em caso de operações mal-sucedidas
+
 
 ---
 #### Execução dos testes automatizados
