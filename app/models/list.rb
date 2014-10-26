@@ -2,6 +2,8 @@ class List
   include Mongoid::Document
   include Mongoid::Enum
 
+  after_save :invalidate_favorite_lists_of_private_lists
+
   belongs_to :user
   has_many :tasks,          dependent: :destroy
   has_many :favorite_lists, dependent: :destroy
@@ -31,6 +33,24 @@ class List
 
     done = self.tasks.select{ |t| t.done? }.count
     (100*done/total.to_f).round(0)
+  end
+
+  # - If an user creates an public list and then decide to make this list private,
+  #     we must mark all FavoriteLists related to this list as "inactive".
+  # - If the user decide to make the list public again, the FavoriteLists become
+  #     "active" again too.
+  def invalidate_favorite_lists_of_private_lists
+    if self.private?
+      self.favorite_lists.each do |favorite|
+        favorite.mark_as_inactive
+      end
+
+    else
+      self.favorite_lists.each do |favorite|
+        favorite.mark_as_active
+      end
+
+    end
   end
 
 end

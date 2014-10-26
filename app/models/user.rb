@@ -40,4 +40,8 @@ class User
   def has_this_list_as_favorite?(list)
     (self.favorite_lists.where(list: list).count > 0) ? true : false
   end
+
+  def active_favorite_lists
+    FavoriteList.active_favorite_lists(self)
+  end
 end

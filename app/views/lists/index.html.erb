@@ -49,4 +49,33 @@
   <%= link_to "Criar nova lista", new_list_path, :class => 'add-list', :"data-toggle" => 'modal', :"data-target" => '#list-modal', :remote => true %>
 </div>
 
+<% if @favorite_lists.count > 0 %>
+<hr class="separator">
+  <h5 class="page-subtitle">Minhas listas favoritas</h5>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Usuário</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @favorite_lists.each do |favorite| %>
+        <tr>
+          <td><%= favorite.list.name %></td>
+          <td><%= format_description(favorite.list.description) %></td>
+          <td><%= favorite.user.email %></td>
+          <td><%= link_to "Ver tarefas", list_path(favorite.list), :class => 'list-details', :"data-toggle" => 'modal', :"data-target" => '#list-details-modal', :remote => true %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
 <div class="bootstrap-modal modal fade in" id="list-modal" aria-hidden="false"></div>
+<div class="bootstrap-modal modal fade in" id="list-details-modal" aria-hidden="false"></div>

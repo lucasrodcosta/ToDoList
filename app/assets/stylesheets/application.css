@@ -27,3 +27,12 @@ a:visited {
 li.menu.selected {
   background-color: #e3e3e3;
 }
+
+hr.separator {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+h5.page-subtitle {
+  margin-bottom: 25px;
+}

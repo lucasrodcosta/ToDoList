@@ -5,6 +5,7 @@ class ListsController < ApplicationController
 
   def index
     @lists = current_user.lists.all
+    @favorite_lists = current_user.active_favorite_lists.all
     respond_with(@lists)
   end
 
