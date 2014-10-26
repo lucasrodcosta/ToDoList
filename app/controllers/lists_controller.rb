@@ -25,13 +25,26 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.user = current_user
-    @list.save
-    render js: "window.location = '/tasks?list=#{@list.id}'"
+
+    begin
+      @list.save!
+    rescue Mongoid::Errors::Validations => ex
+      flash[:error] = @list.errors.full_messages
+      render js: "window.location = '#{lists_path}'"
+    else
+      render js: "window.location = '#{tasks_path(list: @list)}'"
+    end
   end
 
   def update
-    @list.update(list_params)
-    render js: "window.location = '/tasks?list=#{@list.id}'"
+    begin
+      @list.update!(list_params)
+    rescue Mongoid::Errors::Validations => ex
+      flash[:error] = @list.errors.full_messages
+      render js: "window.location = '#{lists_path}'"
+    else
+      render js: "window.location = '#{tasks_path(list: @list)}'"
+    end
   end
 
   def destroy

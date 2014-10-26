@@ -21,15 +21,27 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
     @list = @task.list
-    render js: "window.location = '/tasks?list=#{@list.id}'"
+
+    begin
+      @task.save!
+    rescue Mongoid::Errors::Validations => ex
+      flash[:error] = @task.errors.full_messages
+    end
+
+    render js: "window.location = '#{tasks_path(list: @list)}'"
   end
 
   def update
-    @task.update(task_params)
     @list = @task.list
-    render js: "window.location = '/tasks?list=#{@list.id}'"
+
+    begin
+      @task.update!(task_params)
+    rescue Mongoid::Errors::Validations => ex
+      flash[:error] = @task.errors.full_messages
+    end
+
+    render js: "window.location = '#{tasks_path(list: @list)}'"
   end
 
   def destroy
