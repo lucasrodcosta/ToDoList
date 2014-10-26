@@ -1,17 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy, :mark_as_done, :mark_as_undone]
+  before_action :set_list, only: [:index, :new]
 
   respond_to :html, :js
 
   def index
-    @list = List.find(params[:list])
-    @tasks = @list.tasks.all
+    @tasks = @list.tasks.all if @list
     respond_with(@tasks)
   end
 
   def new
     @task = Task.new
-    @list = List.find(params[:list])
     respond_with(@task)
   end
 
@@ -54,6 +53,16 @@ class TasksController < ApplicationController
   private
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_list
+      begin
+        @list = current_user.lists.find(params[:list])
+      rescue Mongoid::Errors::DocumentNotFound
+        redirect_to root_path
+      rescue Mongoid::Errors::InvalidFind
+        redirect_to root_path
+      end
     end
 
     def task_params
